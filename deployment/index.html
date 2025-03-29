@@ -765,10 +765,10 @@
 <li>Install <a href="https://www.postgresql.org/download/">PostgreSQL</a>.</li>
 </ul>
 <p>Clone, fork, or download this GitHub repository on your local machine using the following command:</p>
-<pre><code class="language-bash">git clone https://github.com/lnynhi02/web-scraping-etl-pipeline.git
-</code></pre>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/lnynhi02/web-scraping-etl-pipeline.git
+</code></pre></div>
 <h4 id="project-structure">Project Structure</h4>
-<pre><code>web-scraping-etl-pipeline/
+<div class="highlight"><pre><span></span><code>web-scraping-etl-pipeline/
 ├── airflow/
 │   ├── dags/
 │   │   └── topcv_flow.py
@@ -785,7 +785,7 @@
 ├── .env
 ├── docker-compose.yaml
 └── requirements.txt
-</code></pre>
+</code></pre></div>
 <h4 id="directory-breakdown">Directory Breakdown</h4>
 <ul>
 <li>
@@ -817,18 +817,18 @@
 <p>To set up the local development environment, begin by creating a virtual environment and installing <code>psycopg2-binary</code>. This package is only needed to run <code>create_table.py</code> locally, so there's no need to install all the packages listed in <code>requirements.txt</code> at this point. The packages from <code>requirements.txt</code> will be installed later in the Docker environment via the <code>Dockerfile</code>.</p>
 <ol>
 <li>Create a virtual environment:
-   <code>sh
-   python -m venv venv</code></li>
+   <div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+</code></pre></div></li>
 <li>Activate the virtual environment:</li>
 <li><strong>Windows PowerShell:</strong>
-     <code>sh
-     venv\Scripts\Activate</code></li>
+     <div class="highlight"><pre><span></span><code>venv<span class="se">\S</span>cripts<span class="se">\A</span>ctivate
+</code></pre></div></li>
 <li><strong>Linux/macOS:</strong>
-     <code>sh
-     source venv/bin/activate</code></li>
+     <div class="highlight"><pre><span></span><code><span class="nb">source</span><span class="w"> </span>venv/bin/activate
+</code></pre></div></li>
 <li>Install the necessary package:
-   <code>sh
-   pip install psycopg2-binary==2.9.9</code></li>
+   <div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>psycopg2-binary<span class="o">==</span><span class="m">2</span>.9.9
+</code></pre></div></li>
 </ol>
 <h2 id="deployment"><strong>💻 Deployment</strong></h2>
 <h3 id="postgres-setup"><strong><code>Postgres Setup</code></strong></h3>
@@ -836,85 +836,85 @@
 <p>When installing postgres, you need to setup a password that we will need later to connect to the database from the Spark environment. <strong>You must remember the password to reconnect to the database servers</strong>. You can also leave the port at 5432. If your installation has succeeded, you can start pgadmin and you should observe something like this window:</p>
 <p><img alt="pgAdmin 4" src="https://www.w3schools.com/postgresql/screenshot_postgresql_pgadmin4_4.png" /></p>
 <p>Since we have many columns for the table we want to create, we opted to use a script with <strong>psycopg2</strong>, a PostgreSQL database adapter for Python, to create the table and add its columns. And we have installed the <strong>psycopg2-binary</strong> package in the <code>requirements.txt</code>.</p>
-<p>You can run the Python script with the following command:</p>
-<pre><code class="language-sh">python pipelines/create_table.py
-</code></pre>
-<p>I use <code>config.ini</code> to access the database configurations, allowing you to modify the application settings easily. Alternatively, if you prefer to use a different method, you can make slight adjustments to the script accordingly. The <code>config.ini</code> file looks as follows:</p>
-<pre><code class="language-ini">[database]
-host=host.docker.internal
-port=5432
-user=postgres
-password=change_me
-database=change_me
-</code></pre>
+<p>You can run the Python script with the following command:
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>pipelines/create_table.py
+</code></pre></div>
+I use <code>config.ini</code> to access the database configurations, allowing you to modify the application settings easily. Alternatively, if you prefer to use a different method, you can make slight adjustments to the script accordingly. The <code>config.ini</code> file looks as follows:
+<div class="highlight"><pre><span></span><code><span class="k">[database]</span>
+<span class="na">host</span><span class="o">=</span><span class="s">host.docker.internal</span>
+<span class="na">port</span><span class="o">=</span><span class="s">5432</span>
+<span class="na">user</span><span class="o">=</span><span class="s">postgres</span>
+<span class="na">password</span><span class="o">=</span><span class="s">change_me</span>
+<span class="na">database</span><span class="o">=</span><span class="s">change_me</span>
+</code></pre></div></p>
 <h3 id="airflow-setup"><strong><code>Airflow Setup</code></strong></h3>
-<p>Let’s take a look at the Directed Acyclic Graph (DAG) that will outline the sequence and dependencies of tasks, enabling Airflow to manage their execution.</p>
-<pre><code class="language-python">from airflow.providers.postgres.operators.postgres import PostgresOperator
-from airflow.operators.python import PythonOperator
-from airflow import DAG
-import airflow.utils.dates
-import logging
-import sys
-import os
+<p>Let’s take a look at the Directed Acyclic Graph (DAG) that will outline the sequence and dependencies of tasks, enabling Airflow to manage their execution.
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">airflow.providers.postgres.operators.postgres</span> <span class="kn">import</span> <span class="n">PostgresOperator</span>
+<span class="kn">from</span> <span class="nn">airflow.operators.python</span> <span class="kn">import</span> <span class="n">PythonOperator</span>
+<span class="kn">from</span> <span class="nn">airflow</span> <span class="kn">import</span> <span class="n">DAG</span>
+<span class="kn">import</span> <span class="nn">airflow.utils.dates</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
 
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'pipelines'))
-from topcv_pipeline import scrape_data, clean_data, transform_data, write_sql_query, check_sql_file
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;pipelines&#39;</span><span class="p">))</span>
+<span class="kn">from</span> <span class="nn">topcv_pipeline</span> <span class="kn">import</span> <span class="n">scrape_data</span><span class="p">,</span> <span class="n">clean_data</span><span class="p">,</span> <span class="n">transform_data</span><span class="p">,</span> <span class="n">write_sql_query</span><span class="p">,</span> <span class="n">check_sql_file</span>
 
-logging.basicConfig(level=logging.INFO)
-TEMPLATE_SEARCH_PATH = os.path.join(os.path.dirname(__file__), '..', 'tmp')
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="n">TEMPLATE_SEARCH_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;tmp&#39;</span><span class="p">)</span>
 
-default_args = {
-    'owner': 'airflow',
-    'start_date': airflow.utils.dates.days_ago(1)
-}
+<span class="n">default_args</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;owner&#39;</span><span class="p">:</span> <span class="s1">&#39;airflow&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;start_date&#39;</span><span class="p">:</span> <span class="n">airflow</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">dates</span><span class="o">.</span><span class="n">days_ago</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">}</span>
 
-with DAG(
-    'job_scraper',
-    default_args=default_args,
-    template_searchpath=TEMPLATE_SEARCH_PATH,
-    schedule_interval='@daily',
-    catchup=False
-) as dag:
-    scrape_data_task = PythonOperator(
-        task_id='scrape_data_task',
-        python_callable=scrape_data,
-        provide_context=True,
-        op_kwargs={'url': 'https://www.topcv.vn/viec-lam-it'},
-    )
+<span class="k">with</span> <span class="n">DAG</span><span class="p">(</span>
+    <span class="s1">&#39;job_scraper&#39;</span><span class="p">,</span>
+    <span class="n">default_args</span><span class="o">=</span><span class="n">default_args</span><span class="p">,</span>
+    <span class="n">template_searchpath</span><span class="o">=</span><span class="n">TEMPLATE_SEARCH_PATH</span><span class="p">,</span>
+    <span class="n">schedule_interval</span><span class="o">=</span><span class="s1">&#39;@daily&#39;</span><span class="p">,</span>
+    <span class="n">catchup</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">dag</span><span class="p">:</span>
+    <span class="n">scrape_data_task</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s1">&#39;scrape_data_task&#39;</span><span class="p">,</span>
+        <span class="n">python_callable</span><span class="o">=</span><span class="n">scrape_data</span><span class="p">,</span>
+        <span class="n">provide_context</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">op_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://www.topcv.vn/viec-lam-it&#39;</span><span class="p">},</span>
+    <span class="p">)</span>
 
-    clean_data_task = PythonOperator(
-        task_id='clean_data_task',
-        python_callable=clean_data,
-        provide_context=True
-    )
+    <span class="n">clean_data_task</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s1">&#39;clean_data_task&#39;</span><span class="p">,</span>
+        <span class="n">python_callable</span><span class="o">=</span><span class="n">clean_data</span><span class="p">,</span>
+        <span class="n">provide_context</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
 
-    transform_data_task = PythonOperator(
-        task_id='transform_data_task',
-        python_callable=transform_data,
-        provide_context=True
-    )
+    <span class="n">transform_data_task</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s1">&#39;transform_data_task&#39;</span><span class="p">,</span>
+        <span class="n">python_callable</span><span class="o">=</span><span class="n">transform_data</span><span class="p">,</span>
+        <span class="n">provide_context</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
 
-    write_sql_query_task = PythonOperator(
-        task_id='write_sql_query_task',
-        python_callable=write_sql_query,
-        provide_context=True
-    )
+    <span class="n">write_sql_query_task</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s1">&#39;write_sql_query_task&#39;</span><span class="p">,</span>
+        <span class="n">python_callable</span><span class="o">=</span><span class="n">write_sql_query</span><span class="p">,</span>
+        <span class="n">provide_context</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
 
-    check_sql_file_task = PythonOperator(
-        task_id='check_sql_file_task',
-        python_callable=check_sql_file,
-        provide_context=True
-    )
+    <span class="n">check_sql_file_task</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s1">&#39;check_sql_file_task&#39;</span><span class="p">,</span>
+        <span class="n">python_callable</span><span class="o">=</span><span class="n">check_sql_file</span><span class="p">,</span>
+        <span class="n">provide_context</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
 
-    write_to_postgres_task = PostgresOperator(
-        task_id='write_to_postgres_task',
-        postgres_conn_id='postgres_conn',
-        sql='postgres_query.sql',
-        trigger_rule='all_success'
-    )
+    <span class="n">write_to_postgres_task</span> <span class="o">=</span> <span class="n">PostgresOperator</span><span class="p">(</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s1">&#39;write_to_postgres_task&#39;</span><span class="p">,</span>
+        <span class="n">postgres_conn_id</span><span class="o">=</span><span class="s1">&#39;postgres_conn&#39;</span><span class="p">,</span>
+        <span class="n">sql</span><span class="o">=</span><span class="s1">&#39;postgres_query.sql&#39;</span><span class="p">,</span>
+        <span class="n">trigger_rule</span><span class="o">=</span><span class="s1">&#39;all_success&#39;</span>
+    <span class="p">)</span>
 
-scrape_data_task &gt;&gt; clean_data_task &gt;&gt; transform_data_task &gt;&gt; write_sql_query_task &gt;&gt; check_sql_file_task &gt;&gt; write_to_postgres_task
-</code></pre>
+<span class="n">scrape_data_task</span> <span class="o">&gt;&gt;</span> <span class="n">clean_data_task</span> <span class="o">&gt;&gt;</span> <span class="n">transform_data_task</span> <span class="o">&gt;&gt;</span> <span class="n">write_sql_query_task</span> <span class="o">&gt;&gt;</span> <span class="n">check_sql_file_task</span> <span class="o">&gt;&gt;</span> <span class="n">write_to_postgres_task</span>
+</code></pre></div></p>
 <ul>
 <li>The dag includes all the tasks that are imported from the <code>topcv_pipeline.py</code></li>
 <li>The tasks are set to execute daily.</li>
@@ -927,28 +927,28 @@ scrape_data_task &gt;&gt; clean_data_task &gt;&gt; transform_data_task &gt;&gt; 
 </ul>
 <p>Now, we just need to run Airflow in Docker. However, we need to create some environment variables that will be used by <strong><em>docker-compose</em></strong>.</p>
 <h4 id="linux">Linux:</h4>
-<pre><code class="language-sh">echo -e &quot;AIRFLOW_UID=$(id -u)&quot; &gt; .env
-</code></pre>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;AIRFLOW_UID=</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>.env
+</code></pre></div>
 <h4 id="windows">Windows:</h4>
-<p>Find the UID by running:</p>
-<pre><code class="language-sh">whoami /user
-</code></pre>
-<p>Take the 4 numbers at the end and run:</p>
-<pre><code class="language-sh">Set-Content -Path .env -Value &quot;AIRFLOW_UID=xxxx&quot;
-</code></pre>
+<p>Find the UID by running:
+<div class="highlight"><pre><span></span><code>whoami<span class="w"> </span>/user
+</code></pre></div>
+Take the 4 numbers at the end and run:
+<div class="highlight"><pre><span></span><code>Set-Content<span class="w"> </span>-Path<span class="w"> </span>.env<span class="w"> </span>-Value<span class="w"> </span><span class="s2">&quot;AIRFLOW_UID=xxxx&quot;</span>
+</code></pre></div></p>
 <h4 id="create-airflowlogs-folder">Create <code>airflow/logs/</code> folder:</h4>
 <ul>
 <li><strong>Windows (PowerShell):</strong>
-  <code>sh
-  New-Item -ItemType Directory -Path "airflow/logs"</code></li>
+  <div class="highlight"><pre><span></span><code>New-Item<span class="w"> </span>-ItemType<span class="w"> </span>Directory<span class="w"> </span>-Path<span class="w"> </span><span class="s2">&quot;airflow/logs&quot;</span>
+</code></pre></div></li>
 <li><strong>Linux:</strong>
-  <code>sh
-  mkdir -p airflow/logs</code></li>
+  <div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>airflow/logs
+</code></pre></div></li>
 </ul>
 <h4 id="start-airflow">Start Airflow:</h4>
-<pre><code class="language-sh">docker network create airflow
-docker-compose up -d
-</code></pre>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>airflow
+docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
 <p>Now we can access the Airflow UI at <code>localhost:8080</code>. Use the username <code>airflow</code> and the password <code>airflow</code> to log in.</p>
 <p><img alt="image" src="../img/1.png" /></p>
 <ul>
@@ -978,83 +978,83 @@ docker-compose up -d
 <p><img alt="image" src="../img/6.png" /></p>
 <p><img alt="image" src="../img/7.png" /></p>
 <h3 id="sql-query"><strong><code>SQL Query</code></strong></h3>
-<p>Once all the data is loaded into the database, we need to perform some cleaning.</p>
-<pre><code class="language-sql">UPDATE jobs_table
-SET salary = NULL
-WHERE salary = 'Thỏa thuận';
+<p>Once all the data is loaded into the database, we need to perform some cleaning.
+<div class="highlight"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NULL</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Thỏa thuận&#39;</span><span class="p">;</span>
 
-ALTER TABLE jobs_table
-ALTER COLUMN salary TYPE numeric USING salary::numeric;
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="k">TYPE</span><span class="w"> </span><span class="nb">numeric</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">salary</span><span class="p">::</span><span class="nb">numeric</span><span class="p">;</span>
 
-ALTER TABLE jobs_table
-ALTER COLUMN salary TYPE integer USING ROUND(salary);
-</code></pre>
-<p>We need to create a stored procedure to update the remaining time for jobs that are still open for applications.</p>
-<pre><code class="language-sql">CREATE OR REPLACE PROCEDURE update_deadline()
-LANGUAGE plpgsql
-AS $$
-DECLARE
-    job_record RECORD;
-    time_remaining INTERVAL;
-BEGIN
-    FOR job_record IN SELECT * FROM jobs_table LOOP
-        time_remaining = jobs_table.due_date - CURRENT_TIMESTAMP;
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="k">TYPE</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">ROUND</span><span class="p">(</span><span class="n">salary</span><span class="p">);</span>
+</code></pre></div></p>
+<p>We need to create a stored procedure to update the remaining time for jobs that are still open for applications.
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="w"> </span><span class="n">update_deadline</span><span class="p">()</span>
+<span class="k">LANGUAGE</span><span class="w"> </span><span class="n">plpgsql</span>
+<span class="k">AS</span><span class="w"> </span><span class="err">$$</span>
+<span class="k">DECLARE</span>
+<span class="w">    </span><span class="n">job_record</span><span class="w"> </span><span class="n">RECORD</span><span class="p">;</span>
+<span class="w">    </span><span class="n">time_remaining</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="p">;</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">FOR</span><span class="w"> </span><span class="n">job_record</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">jobs_table</span><span class="w"> </span><span class="n">LOOP</span>
+<span class="w">        </span><span class="n">time_remaining</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jobs_table</span><span class="p">.</span><span class="n">due_date</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">;</span>
 
-        IF time_remaining &gt; INTERVAL '0 seconds' THEN 
-            IF time_remaining &lt; INTERVAL '1 minutes' THEN
-                UPDATE jobs_table
-                SET remaining_time = 'Còn ' || EXTRACT(SECOND FROM time_remaining) || ' giây để ứng tuyển'
-                WHERE job_link = job_record.job_link;
-            ELSIF time_remaining &lt; INTERVAL '1 hour' THEN
-                UPDATE jobs_table
-                SET remaining_time = 'Còn ' || EXTRACT(MINUTE FROM time_remaining) || ' phút để ứng tuyển'
-                WHERE job_link = job_record.job_link;
-            ELSIF time_remaining &lt; INTERVAL '1 day' THEN 
-                UPDATE jobs_table
-                SET remaining_time = 'Còn ' || EXTRACT(HOUR FROM time_remaining) || ' giờ để ứng tuyển'
-                WHERE job_link = job_record.job_link;
-            ELSE
-                UPDATE jobs_table
-                SET remaining_time = 'Còn ' || EXTRACT(DAY FROM time_remaining) || ' ngày để ứng tuyển'
-                WHERE job_link = job_record.job_link;
-            END IF;
-        ELSE
-            UPDATE jobs_table
-            SET remaining_time = 'Đã hết thời gian ứng tuyển'
-            WHERE job_link = job_record.job_link;
-        END IF;
-    END LOOP;
-END;
-$$;
-</code></pre>
+<span class="w">        </span><span class="k">IF</span><span class="w"> </span><span class="n">time_remaining</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;0 seconds&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span>
+<span class="w">            </span><span class="k">IF</span><span class="w"> </span><span class="n">time_remaining</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;1 minutes&#39;</span><span class="w"> </span><span class="k">THEN</span>
+<span class="w">                </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="w">                </span><span class="k">SET</span><span class="w"> </span><span class="n">remaining_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Còn &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">EXTRACT</span><span class="p">(</span><span class="k">SECOND</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">time_remaining</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39; giây để ứng tuyển&#39;</span>
+<span class="w">                </span><span class="k">WHERE</span><span class="w"> </span><span class="n">job_link</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job_record</span><span class="p">.</span><span class="n">job_link</span><span class="p">;</span>
+<span class="w">            </span><span class="k">ELSIF</span><span class="w"> </span><span class="n">time_remaining</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;1 hour&#39;</span><span class="w"> </span><span class="k">THEN</span>
+<span class="w">                </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="w">                </span><span class="k">SET</span><span class="w"> </span><span class="n">remaining_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Còn &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">EXTRACT</span><span class="p">(</span><span class="k">MINUTE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">time_remaining</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39; phút để ứng tuyển&#39;</span>
+<span class="w">                </span><span class="k">WHERE</span><span class="w"> </span><span class="n">job_link</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job_record</span><span class="p">.</span><span class="n">job_link</span><span class="p">;</span>
+<span class="w">            </span><span class="k">ELSIF</span><span class="w"> </span><span class="n">time_remaining</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;1 day&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span>
+<span class="w">                </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="w">                </span><span class="k">SET</span><span class="w"> </span><span class="n">remaining_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Còn &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">EXTRACT</span><span class="p">(</span><span class="n">HOUR</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">time_remaining</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39; giờ để ứng tuyển&#39;</span>
+<span class="w">                </span><span class="k">WHERE</span><span class="w"> </span><span class="n">job_link</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job_record</span><span class="p">.</span><span class="n">job_link</span><span class="p">;</span>
+<span class="w">            </span><span class="k">ELSE</span>
+<span class="w">                </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="w">                </span><span class="k">SET</span><span class="w"> </span><span class="n">remaining_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Còn &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">EXTRACT</span><span class="p">(</span><span class="k">DAY</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">time_remaining</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39; ngày để ứng tuyển&#39;</span>
+<span class="w">                </span><span class="k">WHERE</span><span class="w"> </span><span class="n">job_link</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job_record</span><span class="p">.</span><span class="n">job_link</span><span class="p">;</span>
+<span class="w">            </span><span class="k">END</span><span class="w"> </span><span class="k">IF</span><span class="p">;</span>
+<span class="w">        </span><span class="k">ELSE</span>
+<span class="w">            </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="w">            </span><span class="k">SET</span><span class="w"> </span><span class="n">remaining_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Đã hết thời gian ứng tuyển&#39;</span>
+<span class="w">            </span><span class="k">WHERE</span><span class="w"> </span><span class="n">job_link</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job_record</span><span class="p">.</span><span class="n">job_link</span><span class="p">;</span>
+<span class="w">        </span><span class="k">END</span><span class="w"> </span><span class="k">IF</span><span class="p">;</span>
+<span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="n">LOOP</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span>
+<span class="err">$$</span><span class="p">;</span>
+</code></pre></div></p>
 <h4 id="querying-data"><strong>Querying Data</strong></h4>
-<pre><code class="language-sql">-- Get a list of jobs with application deadline within the next 10 days
-SELECT job_name, job_link, salary, job_location, remaining_time, due_date
-FROM jobs_table
-WHERE due_date &lt;= NOW() + INTERVAL '20 DAYS';
+<div class="highlight"><pre><span></span><code><span class="c1">-- Get a list of jobs with application deadline within the next 10 days</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">job_name</span><span class="p">,</span><span class="w"> </span><span class="n">job_link</span><span class="p">,</span><span class="w"> </span><span class="n">salary</span><span class="p">,</span><span class="w"> </span><span class="n">job_location</span><span class="p">,</span><span class="w"> </span><span class="n">remaining_time</span><span class="p">,</span><span class="w"> </span><span class="n">due_date</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">due_date</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;20 DAYS&#39;</span><span class="p">;</span>
 
--- Find jobs with salary greater than 15 million VND
-SELECT job_name, job_link, company_name, salary, job_location
-FROM jobs_table
-WHERE salary &gt; 15;
+<span class="c1">-- Find jobs with salary greater than 15 million VND</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">job_name</span><span class="p">,</span><span class="w"> </span><span class="n">job_link</span><span class="p">,</span><span class="w"> </span><span class="n">company_name</span><span class="p">,</span><span class="w"> </span><span class="n">salary</span><span class="p">,</span><span class="w"> </span><span class="n">job_location</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">15</span><span class="p">;</span>
 
--- Get a list of jobs in order of the most recently posted
-SELECT job_name, company_name, posted_date
-FROM jobs_table
-ORDER BY posted_date DESC;
+<span class="c1">-- Get a list of jobs in order of the most recently posted</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">job_name</span><span class="p">,</span><span class="w"> </span><span class="n">company_name</span><span class="p">,</span><span class="w"> </span><span class="n">posted_date</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">posted_date</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span>
 
--- Get the total number of jobs available in Ho Chi Minh City
-SELECT COUNT(*)
-FROM jobs_table
-WHERE job_location LIKE '%Hồ Chí Minh%';
+<span class="c1">-- Get the total number of jobs available in Ho Chi Minh City</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">job_location</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%Hồ Chí Minh%&#39;</span><span class="p">;</span>
 
--- Find the top 10 highest-paying jobs in Ho Chi Minh City
-SELECT job_name, job_link, company_name, salary
-FROM jobs_table
-WHERE job_location LIKE '%Hồ Chí Minh%'
-ORDER BY salary DESC
-LIMIT 10;
-</code></pre>
+<span class="c1">-- Find the top 10 highest-paying jobs in Ho Chi Minh City</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">job_name</span><span class="p">,</span><span class="w"> </span><span class="n">job_link</span><span class="p">,</span><span class="w"> </span><span class="n">company_name</span><span class="p">,</span><span class="w"> </span><span class="n">salary</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">job_location</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%Hồ Chí Minh%&#39;</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="k">DESC</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</code></pre></div>
 <h2 id="technical-documentation"><a href="./">Technical Documentation</a></h2>
 
 
@@ -1108,7 +1108,7 @@ LIMIT 10;
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "content.code.copy", "content.code.select", "content.code.annotate"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
       <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
