@@ -19,7 +19,7 @@
     - [🛢️ Postgres Setup](#postgres-setup)
     - [🚀 Airflow Setup](#airflow-setup)
     - [📜 SQL Query](#sql-query)
-    - [Technical Documentation](deployment.md)
+* [📝 Technical Documentation](index.md)
 
 ---
 
@@ -124,7 +124,7 @@ database=change_me
 
 ### **```Airflow Setup```**
 Let’s take a look at the Directed Acyclic Graph (DAG) that will outline the sequence and dependencies of tasks, enabling Airflow to manage their execution.
-```python
+```py
 from airflow.providers.postgres.operators.postgres import PostgresOperator
 from airflow.operators.python import PythonOperator
 from airflow import DAG

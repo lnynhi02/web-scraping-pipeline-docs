@@ -1,0 +1,1118 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://lnynhi02.github.io/web-scraping-pipeline-docs/deployment/">
+      
+      
+      
+        <link rel="next" href="..">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.9">
+    
+    
+      
+        <title>Deployment - Web Scraping Pipeline Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.4af4bdda.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#jobscraper-automated-job-data-pipeline" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Web Scraping Pipeline Docs" class="md-header__button md-logo" aria-label="Web Scraping Pipeline Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Web Scraping Pipeline Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Deployment
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Web Scraping Pipeline Docs" class="md-nav__button md-logo" aria-label="Web Scraping Pipeline Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Web Scraping Pipeline Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Deployment
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Deployment
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#achievements" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏆 Achievements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      📕 Table Of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#local-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚙️ Local Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚙️ Local Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#project-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Project Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directory-breakdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      Directory Breakdown
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      💻 Deployment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="💻 Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#postgres-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Postgres Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#airflow-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Airflow Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Airflow Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linux:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Windows:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-airflowlogs-folder" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create airflow/logs/ folder:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-airflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Start Airflow:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL Query
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SQL Query">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#querying-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Querying Data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Documentation
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Technical Documentation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/lnynhi02/web-scraping-etl-pipeline" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GitHub Repository
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#achievements" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏆 Achievements
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      📕 Table Of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#local-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚙️ Local Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚙️ Local Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#project-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Project Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#directory-breakdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      Directory Breakdown
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      💻 Deployment
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="💻 Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#postgres-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Postgres Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#airflow-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Airflow Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Airflow Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linux:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Windows:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-airflowlogs-folder" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create airflow/logs/ folder:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-airflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Start Airflow:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL Query
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SQL Query">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#querying-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Querying Data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Documentation
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="jobscraper-automated-job-data-pipeline"><strong><em>💼 JobScraper: Automated Job Data Pipeline</em></strong></h1>
+<h2 id="overview"><strong>Overview</strong></h2>
+<p><strong>JobScraper</strong> is a web scraping and data pipeline project designed to automatically extract job postings from the <strong>TOPCV</strong> website (a website that posts job listings in Vietnam). The extracted data is cleaned, transformed, and stored in a structured database for easy querying and analysis. This project provides insights into the current job market and can be extended for data visualization and reporting purposes.</p>
+<p><img alt="Image" src="../img/pipeline.gif" /></p>
+<h2 id="achievements"><strong>🏆 Achievements</strong></h2>
+<ul>
+<li>Stored new jobs daily in the PostgreSQL database to keep an updated repository.</li>
+<li>Cleaned the 'job_name' and 'salary' columns to enhance query performance and ensure accurate data retrieval.</li>
+<li>Created a 'due_date' column to facilitate easy tracking of job deadlines.</li>
+<li>Utilized a stored procedure to update the 'deadline' column daily, for example, changing 'Còn 24 ngày để ứng tuyển' to 'Còn 23 ngày để ứng tuyển' the following day.</li>
+</ul>
+<h2 id="table-of-contents"><strong>📕 Table Of Contents</strong></h2>
+<ul>
+<li><a href="#local-setup">⚙️ Local Setup</a></li>
+<li><a href="#deployment">💻 Deployment</a><ul>
+<li><a href="#postgres-setup">🛢️ Postgres Setup</a></li>
+<li><a href="#airflow-setup">🚀 Airflow Setup</a></li>
+<li><a href="#sql-query">📜 SQL Query</a></li>
+</ul>
+</li>
+<li><a href="../">📝 Technical Documentation</a></li>
+</ul>
+<hr />
+<h2 id="local-setup"><strong>⚙️ Local Setup</strong></h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li>Install <a href="https://www.docker.com/products/docker-desktop/">Docker</a> for running Airflow.</li>
+<li>Install <a href="https://www.python.org/">Python</a>.</li>
+<li>Install <a href="https://www.postgresql.org/download/">PostgreSQL</a>.</li>
+</ul>
+<p>Clone, fork, or download this GitHub repository on your local machine using the following command:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/lnynhi02/web-scraping-etl-pipeline.git
+</code></pre></div>
+<h4 id="project-structure">Project Structure</h4>
+<div class="highlight"><pre><span></span><code>web-scraping-etl-pipeline/
+├── airflow/
+│   ├── dags/
+│   │   └── topcv_flow.py
+│   └── Dockerfile
+├── config/
+│   └── config.ini
+├── pipelines/
+│   ├── create_table.py
+│   ├── topcv_pipeline.py
+│   └── utils.py
+├── tmp/
+│   ├── last_processed_time.json
+│   └── postgres_query.sql
+├── .env
+├── docker-compose.yaml
+└── requirements.txt
+</code></pre></div>
+<h4 id="directory-breakdown">Directory Breakdown</h4>
+<ul>
+<li>
+<p><code>airflow/</code>: Contains <code>dags/topcv_flow.py</code>, which holds the DAG responsible for orchestrating the TopCV-related workflow. The Dockerfile builds a custom image based on <code>apache/airflow:2.8.0</code>, setting up the Airflow environment and installing Python dependencies. It also installs necessary system libraries, along with tools like <code>pyvirtualdisplay</code>, <code>playwright</code>, and <code>Chromium</code> for browser-based tasks. This setup is tailored for running Airflow workflows that involve web scraping or automated browser interactions.</p>
+</li>
+<li>
+<p><code>config/</code>: Contains <code>config.ini</code>, which includes the configuration for your PostgreSQL database. Please change the values of the <code>database</code> and <code>password</code> to your own credentials.</p>
+</li>
+<li>
+<p><code>pipelines/</code>: Contains all the core tasks of the pipeline:</p>
+<ul>
+<li><code>create_table.py</code>: Script for creating PostgreSQL tables.</li>
+<li><code>utils.py</code>: Functions such as <code>clean_title</code>, <code>clean_salary</code>, <code>transform_salary</code>, and <code>calculate_dates</code> for data cleaning and transformation.</li>
+<li><code>topcv_pipeline.py</code>: Uses functions from <code>utils.py</code> to clean and process job data scraped from the web.</li>
+</ul>
+</li>
+<li>
+<p><code>tmp/</code>:</p>
+<ul>
+<li><code>last_processed_time.json</code>: Stores the timestamp of the last processed job.</li>
+<li><code>postgres_query.sql</code>: Holds the SQL INSERT statements for each job. These files help track processed jobs and insert scraped data into PostgreSQL.</li>
+</ul>
+</li>
+<li>
+<p><code>docker-compose.yaml</code>: Configures Airflow services.</p>
+</li>
+</ul>
+<hr />
+<p>To set up the local development environment, begin by creating a virtual environment and installing <code>psycopg2-binary</code>. This package is only needed to run <code>create_table.py</code> locally, so there's no need to install all the packages listed in <code>requirements.txt</code> at this point. The packages from <code>requirements.txt</code> will be installed later in the Docker environment via the <code>Dockerfile</code>.</p>
+<ol>
+<li>Create a virtual environment:
+   <div class="highlight"><pre><span></span><code>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+</code></pre></div></li>
+<li>Activate the virtual environment:</li>
+<li><strong>Windows PowerShell:</strong>
+     <div class="highlight"><pre><span></span><code>venv<span class="se">\S</span>cripts<span class="se">\A</span>ctivate
+</code></pre></div></li>
+<li><strong>Linux/macOS:</strong>
+     <div class="highlight"><pre><span></span><code><span class="nb">source</span><span class="w"> </span>venv/bin/activate
+</code></pre></div></li>
+<li>Install the necessary package:
+   <div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>psycopg2-binary<span class="o">==</span><span class="m">2</span>.9.9
+</code></pre></div></li>
+</ol>
+<h2 id="deployment"><strong>💻 Deployment</strong></h2>
+<h3 id="postgres-setup"><strong><code>Postgres Setup</code></strong></h3>
+<p>Before setting-up our airflow configurations, let’s create the Postgres database that will persist our data. I prefer using the <strong>pgAdmin 4</strong> tool for this, however any other Postgres development platform can do the job.</p>
+<p>When installing postgres, you need to setup a password that we will need later to connect to the database from the Spark environment. <strong>You must remember the password to reconnect to the database servers</strong>. You can also leave the port at 5432. If your installation has succeeded, you can start pgadmin and you should observe something like this window:</p>
+<p><img alt="pgAdmin 4" src="https://www.w3schools.com/postgresql/screenshot_postgresql_pgadmin4_4.png" /></p>
+<p>Since we have many columns for the table we want to create, we opted to use a script with <strong>psycopg2</strong>, a PostgreSQL database adapter for Python, to create the table and add its columns. And we have installed the <strong>psycopg2-binary</strong> package in the <code>requirements.txt</code>.</p>
+<p>You can run the Python script with the following command:
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>pipelines/create_table.py
+</code></pre></div>
+I use <code>config.ini</code> to access the database configurations, allowing you to modify the application settings easily. Alternatively, if you prefer to use a different method, you can make slight adjustments to the script accordingly. The <code>config.ini</code> file looks as follows:
+<div class="highlight"><pre><span></span><code><span class="k">[database]</span>
+<span class="na">host</span><span class="o">=</span><span class="s">host.docker.internal</span>
+<span class="na">port</span><span class="o">=</span><span class="s">5432</span>
+<span class="na">user</span><span class="o">=</span><span class="s">postgres</span>
+<span class="na">password</span><span class="o">=</span><span class="s">change_me</span>
+<span class="na">database</span><span class="o">=</span><span class="s">change_me</span>
+</code></pre></div></p>
+<h3 id="airflow-setup"><strong><code>Airflow Setup</code></strong></h3>
+<p>Let’s take a look at the Directed Acyclic Graph (DAG) that will outline the sequence and dependencies of tasks, enabling Airflow to manage their execution.
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">airflow.providers.postgres.operators.postgres</span> <span class="kn">import</span> <span class="n">PostgresOperator</span>
+<span class="kn">from</span> <span class="nn">airflow.operators.python</span> <span class="kn">import</span> <span class="n">PythonOperator</span>
+<span class="kn">from</span> <span class="nn">airflow</span> <span class="kn">import</span> <span class="n">DAG</span>
+<span class="kn">import</span> <span class="nn">airflow.utils.dates</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;pipelines&#39;</span><span class="p">))</span>
+<span class="kn">from</span> <span class="nn">topcv_pipeline</span> <span class="kn">import</span> <span class="n">scrape_data</span><span class="p">,</span> <span class="n">clean_data</span><span class="p">,</span> <span class="n">transform_data</span><span class="p">,</span> <span class="n">write_sql_query</span><span class="p">,</span> <span class="n">check_sql_file</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="n">TEMPLATE_SEARCH_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;tmp&#39;</span><span class="p">)</span>
+
+<span class="n">default_args</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;owner&#39;</span><span class="p">:</span> <span class="s1">&#39;airflow&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;start_date&#39;</span><span class="p">:</span> <span class="n">airflow</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">dates</span><span class="o">.</span><span class="n">days_ago</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">with</span> <span class="n">DAG</span><span class="p">(</span>
+    <span class="s1">&#39;job_scraper&#39;</span><span class="p">,</span>
+    <span class="n">default_args</span><span class="o">=</span><span class="n">default_args</span><span class="p">,</span>
+    <span class="n">template_searchpath</span><span class="o">=</span><span class="n">TEMPLATE_SEARCH_PATH</span><span class="p">,</span>
+    <span class="n">schedule_interval</span><span class="o">=</span><span class="s1">&#39;@daily&#39;</span><span class="p">,</span>
+    <span class="n">catchup</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">dag</span><span class="p">:</span>
+    <span class="n">scrape_data_task</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s1">&#39;scrape_data_task&#39;</span><span class="p">,</span>
+        <span class="n">python_callable</span><span class="o">=</span><span class="n">scrape_data</span><span class="p">,</span>
+        <span class="n">provide_context</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">op_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://www.topcv.vn/viec-lam-it&#39;</span><span class="p">},</span>
+    <span class="p">)</span>
+
+    <span class="n">clean_data_task</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s1">&#39;clean_data_task&#39;</span><span class="p">,</span>
+        <span class="n">python_callable</span><span class="o">=</span><span class="n">clean_data</span><span class="p">,</span>
+        <span class="n">provide_context</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+
+    <span class="n">transform_data_task</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s1">&#39;transform_data_task&#39;</span><span class="p">,</span>
+        <span class="n">python_callable</span><span class="o">=</span><span class="n">transform_data</span><span class="p">,</span>
+        <span class="n">provide_context</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+
+    <span class="n">write_sql_query_task</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s1">&#39;write_sql_query_task&#39;</span><span class="p">,</span>
+        <span class="n">python_callable</span><span class="o">=</span><span class="n">write_sql_query</span><span class="p">,</span>
+        <span class="n">provide_context</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+
+    <span class="n">check_sql_file_task</span> <span class="o">=</span> <span class="n">PythonOperator</span><span class="p">(</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s1">&#39;check_sql_file_task&#39;</span><span class="p">,</span>
+        <span class="n">python_callable</span><span class="o">=</span><span class="n">check_sql_file</span><span class="p">,</span>
+        <span class="n">provide_context</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+
+    <span class="n">write_to_postgres_task</span> <span class="o">=</span> <span class="n">PostgresOperator</span><span class="p">(</span>
+        <span class="n">task_id</span><span class="o">=</span><span class="s1">&#39;write_to_postgres_task&#39;</span><span class="p">,</span>
+        <span class="n">postgres_conn_id</span><span class="o">=</span><span class="s1">&#39;postgres_conn&#39;</span><span class="p">,</span>
+        <span class="n">sql</span><span class="o">=</span><span class="s1">&#39;postgres_query.sql&#39;</span><span class="p">,</span>
+        <span class="n">trigger_rule</span><span class="o">=</span><span class="s1">&#39;all_success&#39;</span>
+    <span class="p">)</span>
+
+<span class="n">scrape_data_task</span> <span class="o">&gt;&gt;</span> <span class="n">clean_data_task</span> <span class="o">&gt;&gt;</span> <span class="n">transform_data_task</span> <span class="o">&gt;&gt;</span> <span class="n">write_sql_query_task</span> <span class="o">&gt;&gt;</span> <span class="n">check_sql_file_task</span> <span class="o">&gt;&gt;</span> <span class="n">write_to_postgres_task</span>
+</code></pre></div></p>
+<ul>
+<li>The dag includes all the tasks that are imported from the <code>topcv_pipeline.py</code></li>
+<li>The tasks are set to execute daily.</li>
+<li>The first task is the <strong>Scrape Data Task</strong>. This task scrapes data from the <em>TOPCV</em> website into a staging table in Postgres database, initiating the data processing workflow.</li>
+<li>The second task, <strong>Clean Data Task</strong>, will retrieve new, unprocessed jobs from the staging table, clean the 'title' and 'salary' fields by using <code>clean_title()</code> and <code>clean_salary()</code> function from <code>utils.py</code>, and then push the cleaned data into XCom for later transformation.</li>
+<li>The third task is the <strong>Transform Data Task</strong>, which pulls cleaned data from XCom, uses the <code>transform_salary()</code> from <code>utils.py</code> to calculate the average salary, and then pushes the results back to XCom.</li>
+<li>The fourth task, <strong>Write SQL Query Task</strong>, pulls transformed data from XCom and then generates INSERT SQL commands for each job, saving them to <code>postgres_query.sql</code> for use with the <code>PostgresOperator</code> in downstream task.</li>
+<li>The fifth task, <strong>Check SQL File Task</strong>, checks whether the <code>postgres_query.sql</code> file contains any SQL commands. If it does, the downstream tasks will be executed; if the file is empty, the downstream tasks will be skipped.</li>
+<li>The final task is the <strong>Write To Postgres Task</strong>. It uses the <strong>PostgresOperator</strong> for execution, running the SQL commands from the <code>postgres_query.sql</code> file and storing the jobs in the PostgreSQL database.</li>
+</ul>
+<p>Now, we just need to run Airflow in Docker. However, we need to create some environment variables that will be used by <strong><em>docker-compose</em></strong>.</p>
+<h4 id="linux">Linux:</h4>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;AIRFLOW_UID=</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>.env
+</code></pre></div>
+<h4 id="windows">Windows:</h4>
+<p>Find the UID by running:
+<div class="highlight"><pre><span></span><code>whoami<span class="w"> </span>/user
+</code></pre></div>
+Take the 4 numbers at the end and run:
+<div class="highlight"><pre><span></span><code>Set-Content<span class="w"> </span>-Path<span class="w"> </span>.env<span class="w"> </span>-Value<span class="w"> </span><span class="s2">&quot;AIRFLOW_UID=xxxx&quot;</span>
+</code></pre></div></p>
+<h4 id="create-airflowlogs-folder">Create <code>airflow/logs/</code> folder:</h4>
+<ul>
+<li><strong>Windows (PowerShell):</strong>
+  <div class="highlight"><pre><span></span><code>New-Item<span class="w"> </span>-ItemType<span class="w"> </span>Directory<span class="w"> </span>-Path<span class="w"> </span><span class="s2">&quot;airflow/logs&quot;</span>
+</code></pre></div></li>
+<li><strong>Linux:</strong>
+  <div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>airflow/logs
+</code></pre></div></li>
+</ul>
+<h4 id="start-airflow">Start Airflow:</h4>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>airflow
+docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
+<p>Now we can access the Airflow UI at <code>localhost:8080</code>. Use the username <code>airflow</code> and the password <code>airflow</code> to log in.</p>
+<p><img alt="image" src="../img/1.png" /></p>
+<ul>
+<li>We can see the dag <code>job_scraper</code>. </li>
+</ul>
+<p><img alt="image" src="../img/2.png" /></p>
+<ul>
+<li>
+<p>Before running the DAG, we need to establish a <strong><em>Postgres Connection</em></strong> in Airflow to enable connectivity with the Postgres database. This connection is essential for executing the <code>write_to_postgres_task</code> using the <code>PostgresOperator</code>.</p>
+</li>
+<li>
+<p>Navigate to the <strong>Admin</strong> section at the top and select <strong>Connections</strong>. Then, click on the <strong>+</strong> icon to add a new connection.</p>
+</li>
+</ul>
+<p><img alt="image" src="../img/4.png" /></p>
+<ul>
+<li>Since we are connecting from Airflow running in a Docker container, set the host to <strong>host.docker.internal</strong>. Ensure you also enter your <strong>database</strong> name and <strong>password</strong> accordingly. The <strong>Connection ID</strong> will later be utilized in the <strong>postgres_conn_id</strong> parameter within the <code>write_to_postgres_task</code>.</li>
+</ul>
+<p><img alt="image" src="../img/5.png" /></p>
+<ul>
+<li>Let's go and run the DAG.</li>
+</ul>
+<p><img alt="image" src="../img/3.png" /></p>
+<ul>
+<li>You can monitor the log for each task to gain insights into the scraping process and see how many jobs have been collected.</li>
+</ul>
+<p><img alt="image" src="../img/6.png" /></p>
+<p><img alt="image" src="../img/7.png" /></p>
+<h3 id="sql-query"><strong><code>SQL Query</code></strong></h3>
+<p>Once all the data is loaded into the database, we need to perform some cleaning.
+<div class="highlight"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="k">SET</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NULL</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Thỏa thuận&#39;</span><span class="p">;</span>
+
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="k">TYPE</span><span class="w"> </span><span class="nb">numeric</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">salary</span><span class="p">::</span><span class="nb">numeric</span><span class="p">;</span>
+
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="k">TYPE</span><span class="w"> </span><span class="nb">integer</span><span class="w"> </span><span class="k">USING</span><span class="w"> </span><span class="n">ROUND</span><span class="p">(</span><span class="n">salary</span><span class="p">);</span>
+</code></pre></div></p>
+<p>We need to create a stored procedure to update the remaining time for jobs that are still open for applications.
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="w"> </span><span class="n">update_deadline</span><span class="p">()</span>
+<span class="k">LANGUAGE</span><span class="w"> </span><span class="n">plpgsql</span>
+<span class="k">AS</span><span class="w"> </span><span class="err">$$</span>
+<span class="k">DECLARE</span>
+<span class="w">    </span><span class="n">job_record</span><span class="w"> </span><span class="n">RECORD</span><span class="p">;</span>
+<span class="w">    </span><span class="n">time_remaining</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="p">;</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">FOR</span><span class="w"> </span><span class="n">job_record</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">jobs_table</span><span class="w"> </span><span class="n">LOOP</span>
+<span class="w">        </span><span class="n">time_remaining</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jobs_table</span><span class="p">.</span><span class="n">due_date</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">;</span>
+
+<span class="w">        </span><span class="k">IF</span><span class="w"> </span><span class="n">time_remaining</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;0 seconds&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span>
+<span class="w">            </span><span class="k">IF</span><span class="w"> </span><span class="n">time_remaining</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;1 minutes&#39;</span><span class="w"> </span><span class="k">THEN</span>
+<span class="w">                </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="w">                </span><span class="k">SET</span><span class="w"> </span><span class="n">remaining_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Còn &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">EXTRACT</span><span class="p">(</span><span class="k">SECOND</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">time_remaining</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39; giây để ứng tuyển&#39;</span>
+<span class="w">                </span><span class="k">WHERE</span><span class="w"> </span><span class="n">job_link</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job_record</span><span class="p">.</span><span class="n">job_link</span><span class="p">;</span>
+<span class="w">            </span><span class="k">ELSIF</span><span class="w"> </span><span class="n">time_remaining</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;1 hour&#39;</span><span class="w"> </span><span class="k">THEN</span>
+<span class="w">                </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="w">                </span><span class="k">SET</span><span class="w"> </span><span class="n">remaining_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Còn &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">EXTRACT</span><span class="p">(</span><span class="k">MINUTE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">time_remaining</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39; phút để ứng tuyển&#39;</span>
+<span class="w">                </span><span class="k">WHERE</span><span class="w"> </span><span class="n">job_link</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job_record</span><span class="p">.</span><span class="n">job_link</span><span class="p">;</span>
+<span class="w">            </span><span class="k">ELSIF</span><span class="w"> </span><span class="n">time_remaining</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;1 day&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span>
+<span class="w">                </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="w">                </span><span class="k">SET</span><span class="w"> </span><span class="n">remaining_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Còn &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">EXTRACT</span><span class="p">(</span><span class="n">HOUR</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">time_remaining</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39; giờ để ứng tuyển&#39;</span>
+<span class="w">                </span><span class="k">WHERE</span><span class="w"> </span><span class="n">job_link</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job_record</span><span class="p">.</span><span class="n">job_link</span><span class="p">;</span>
+<span class="w">            </span><span class="k">ELSE</span>
+<span class="w">                </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="w">                </span><span class="k">SET</span><span class="w"> </span><span class="n">remaining_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Còn &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">EXTRACT</span><span class="p">(</span><span class="k">DAY</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">time_remaining</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39; ngày để ứng tuyển&#39;</span>
+<span class="w">                </span><span class="k">WHERE</span><span class="w"> </span><span class="n">job_link</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job_record</span><span class="p">.</span><span class="n">job_link</span><span class="p">;</span>
+<span class="w">            </span><span class="k">END</span><span class="w"> </span><span class="k">IF</span><span class="p">;</span>
+<span class="w">        </span><span class="k">ELSE</span>
+<span class="w">            </span><span class="k">UPDATE</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="w">            </span><span class="k">SET</span><span class="w"> </span><span class="n">remaining_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Đã hết thời gian ứng tuyển&#39;</span>
+<span class="w">            </span><span class="k">WHERE</span><span class="w"> </span><span class="n">job_link</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">job_record</span><span class="p">.</span><span class="n">job_link</span><span class="p">;</span>
+<span class="w">        </span><span class="k">END</span><span class="w"> </span><span class="k">IF</span><span class="p">;</span>
+<span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="n">LOOP</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span>
+<span class="err">$$</span><span class="p">;</span>
+</code></pre></div></p>
+<h4 id="querying-data"><strong>Querying Data</strong></h4>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Get a list of jobs with application deadline within the next 10 days</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">job_name</span><span class="p">,</span><span class="w"> </span><span class="n">job_link</span><span class="p">,</span><span class="w"> </span><span class="n">salary</span><span class="p">,</span><span class="w"> </span><span class="n">job_location</span><span class="p">,</span><span class="w"> </span><span class="n">remaining_time</span><span class="p">,</span><span class="w"> </span><span class="n">due_date</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">due_date</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;20 DAYS&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Find jobs with salary greater than 15 million VND</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">job_name</span><span class="p">,</span><span class="w"> </span><span class="n">job_link</span><span class="p">,</span><span class="w"> </span><span class="n">company_name</span><span class="p">,</span><span class="w"> </span><span class="n">salary</span><span class="p">,</span><span class="w"> </span><span class="n">job_location</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">15</span><span class="p">;</span>
+
+<span class="c1">-- Get a list of jobs in order of the most recently posted</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">job_name</span><span class="p">,</span><span class="w"> </span><span class="n">company_name</span><span class="p">,</span><span class="w"> </span><span class="n">posted_date</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">posted_date</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span>
+
+<span class="c1">-- Get the total number of jobs available in Ho Chi Minh City</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">job_location</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%Hồ Chí Minh%&#39;</span><span class="p">;</span>
+
+<span class="c1">-- Find the top 10 highest-paying jobs in Ho Chi Minh City</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">job_name</span><span class="p">,</span><span class="w"> </span><span class="n">job_link</span><span class="p">,</span><span class="w"> </span><span class="n">company_name</span><span class="p">,</span><span class="w"> </span><span class="n">salary</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">jobs_table</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">job_location</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%Hồ Chí Minh%&#39;</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="k">DESC</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</code></pre></div>
+<h2 id="technical-documentation"><a href="./">Technical Documentation</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "content.code.copy", "content.code.select", "content.code.annotate"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

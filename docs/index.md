@@ -116,7 +116,7 @@ Ref: <a href="https://marclamberti.com/blog/airflow-xcom/#XCom_limitations" targ
 
 After storing job data, the next step could be to *generate reports* or *integrate with BI tools*.  
 
-Possible options:  
+🔹 **Possible options:**  
 - Exporting reports to *Google Sheets, Excel, or PDFs*.  
 - Connecting *PostgreSQL* with *Power BI, Metabase, or Superset* for visualization. 
 
